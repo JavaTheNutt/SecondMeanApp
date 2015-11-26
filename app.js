@@ -1,52 +1,71 @@
 var app = angular.module('DonationWebApp', ['ngRoute']);
 
-app.factory('donations', function(){
+app.factory('donations', function () {
 
-  var donations = [{paymenttype: 'PayPal', amount: 1500, upvotes: 0},
-                    {paymenttype: 'Direct', amount: 1000, upvotes: 2}
-                    ];
+	var donations = [{paymenttype: 'PayPal', amount: 1500, upvotes: 0},
+		{paymenttype: 'Direct', amount: 1000, upvotes: 2}
+	];
 
-  return donations;
+	return donations;
 });
 
-app.config(function($routeProvider) {
-        $routeProvider
+app.config(function ($routeProvider) {
+	$routeProvider
 
-            // route for the home page
-            .when('/', {
-                templateUrl : 'pages/home.html',
-                controller  : 'mainController'
-            })
+	// route for the home page
+		.when('/', {
+			templateUrl: 'pages/home.html',
+			controller: 'mainController'
+		})
 
-             // route for the donate page
-            .when('/donate', {
-                templateUrl : 'pages/donate.html',
-                controller  : 'donateController'
-            })
+		// route for the donate page
+		.when('/donate', {
+			templateUrl: 'pages/donate.html',
+			controller: 'donateController'
+		})
 
-             // route for the donations page
-            .when('/donations', {
-                templateUrl : 'pages/donations.html',
-                controller  : 'donationsController'
-            })
-    });
+		// route for the donations page
+		.when('/donations', {
+			templateUrl: 'pages/donations.html',
+			controller: 'donationsController'
+		})
+
+		.when('/about', {
+			templateUrl : 'pages/about.html',
+			controller : 'aboutController'
+		})
+
+		.when('/contact', {
+			templateUrl:'pages/contact.html',
+			controller: 'contactController'
+		})
+
+});
 
 // create the controller and inject Angular's $scope
 
-  app.controller('mainController', function($scope) {
-    // create a message to display in our view
-    $scope.message = 'Homer for President!';
-  });
+app.controller('mainController', function ($scope) {
+	// create a message to display in our view
+	$scope.message = 'Homer for President!';
+});
 
-  app.controller('donateController', function($scope) {
-    // create a message to display in our view
-    $scope.message = 'Donation Page!';
-    $scope.amount = 1000;
-    $scope.options = [{ name: "PayPal", id: 0 }, { name: "Direct", id: 1 }];
-    $scope.paymenttype = $scope.options[0];
-  });
+app.controller('donateController', function ($scope) {
+	// create a message to display in our view
+	$scope.message = 'Donation Page!';
+	$scope.amount = 1000;
+	$scope.options = [{name: "PayPal", id: 0}, {name: "Direct", id: 1}];
+	$scope.paymenttype = $scope.options[0];
+});
 
-  app.controller('donationsController', function($scope) {
-    // create a message to display in our view
-    $scope.message = 'Donations Page!';
-  });
+app.controller('donationsController', function ($scope) {
+	// create a message to display in our view
+	$scope.message = 'Donations Page!';
+});
+
+app.controller('aboutController', ['$scope', function ($scope) {
+	$scope.message = 'This is the about page'
+}]);
+
+app.controller('contactController', ['$scope', function ($scope) {
+	$scope.message = 'This is the contact page'
+}]);
